@@ -6,7 +6,7 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 17:52:15 by pabeckha          #+#    #+#             */
-/*   Updated: 2023/12/03 15:01:31 by pabeckha         ###   ########.fr       */
+/*   Updated: 2023/12/04 15:53:28 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int print_str(char *str)
 	return (count);
 }
 
-int print_nbr()
+// int print_nbr()
 
 
 
