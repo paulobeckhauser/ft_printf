@@ -6,86 +6,56 @@
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 17:52:15 by pabeckha          #+#    #+#             */
-/*   Updated: 2023/12/04 15:53:28 by pabeckha         ###   ########.fr       */
+/*   Updated: 2023/12/06 14:13:38 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int print_str(char *str)
+static int	ft_cases(va_list ap, const char charact)
 {
-	int count;
+	int	return_lenght;
 
-	count = -1;
-	while (str[++count])
-	{
-		ft_putchar_fd(str[count], 1);
-	}
-	return (count);
+	return_lenght = 0;
+	if (charact == 'c')
+		return_lenght += ft_printf_c(va_arg(ap, int));
+	else if (charact == 's')
+		return_lenght += ft_printf_s(va_arg(ap, char *));
+	else if (charact == 'p')
+		return_lenght += ft_printf_p(va_arg(ap, unsigned long long));
+	else if (charact == 'd' || charact == 'i')
+		return_lenght += ft_printf_d_i_flag(va_arg(ap, int));
+	else if (charact == 'u')
+		return_lenght += ft_printf_u_flag(va_arg(ap, unsigned int));
+	else if (charact == 'x' || charact == 'X')
+		return_lenght += ft_printf_x_flag(va_arg(ap, int), charact);
+	else if (charact == '%')
+		return_lenght += ft_printf_percent();
+	return (return_lenght);
 }
-
-// int print_nbr()
-
-
-
-
-
-
-
 
 int	ft_printf(const char *format, ...)
 {
-	int count;
-	int i;
-	va_list ap;
+	int		return_lenght;
+	int		i;
+	va_list	ap;
 
-	i = -1;
+	if (!format)
+		return (-1);
+	i = 0;
+	return_lenght = 0;
 	va_start(ap, format);
-	count = 0;
-	while (format[++i])
+	while (format[i])
 	{
-		if (format[i] != '%')
+		if (format[i] == '%')
 		{
-			ft_putchar_fd(format[i], 1);
-			count += 1;
+			return_lenght += ft_cases(ap, format[i + 1]);
+			i++;
 		}
-
-		
-			
-		else if (format[i] == '%')
-		{
-
-
-
-			
-			if (format[++i] == 'c')
-			{
-				ft_putchar_fd(va_arg(ap, int), 1);
-				count += 1;
-			}
-			else if (format[++i] == 's')
-			{
-				print_str(va_arg(ap, char *));
-			}
-
-			// else if (format[++i] == 'p')
-			// {
-				
-			// }
-
-			// else if (format[++i] == 'd')
-			// {
-				
-			// }
-				
-
-
-
-
-
-
-		}
+		else
+			return_lenght += ft_printf_c(format[i]);
+		i++;
 	}
-	
-	return (count);
+	va_end(ap);
+	return (return_lenght);
 }

@@ -1,30 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_d_i_flag.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pabeckha <pabeckha@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/03 11:12:22 by pabeckha          #+#    #+#             */
-/*   Updated: 2023/12/06 13:48:34 by pabeckha         ###   ########.fr       */
+/*   Created: 2023/12/05 19:37:42 by pabeckha          #+#    #+#             */
+/*   Updated: 2023/12/06 13:49:34 by pabeckha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include "libft/libft.h"
-# include <stdarg.h>
-# include <unistd.h>
+static int	len_nb(long nb)
+{
+	int	len;
 
-int	ft_printf_c(char c);
-int	ft_printf_s(char *string);
-int	ft_printf_p(unsigned long long ptr);
-int	ft_printf_d_i_flag(int nb);
-int	ft_printf_u_flag(unsigned int nb);
-int	ft_printf_x_flag(unsigned int nb, const char format);
-int	ft_printf_percent(void);
+	len = 0;
+	if (nb < 0)
+	{
+		nb = nb * -1;
+		len++;
+	}
+	if (nb == 0)
+		return (1);
+	while (nb > 0)
+	{
+		nb = nb / 10;
+		len++;
+	}
+	return (len);
+}
 
-int	ft_printf(const char *format, ...);
+int	ft_printf_d_i_flag(int nb)
+{
+	int	count;
 
-#endif
+	count = len_nb(nb);
+	ft_putnbr_fd(nb, 1);
+	return (count);
+}

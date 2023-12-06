@@ -4,7 +4,14 @@
 
 NAME := libftprintf.a
 
-SRC := ft_printf.c
+SRC := ft_printf.c \
+		ft_printf_c_flag.c \
+		ft_printf_s_flag.c \
+		ft_printf_p_flag.c \
+		ft_printf_d_i_flag.c \
+		ft_printf_u_flag.c \
+		ft_printf_x_flag.c \
+		ft_printf_percent.c
 
 SUBDIR = libft
 
@@ -32,10 +39,10 @@ $(OBJS):
 ${SUBDIR}:
 	cd ${SUBDIR} && ${MAKE}
 
-test:	
-	make 
-	$(CC) ../main_ft_printf.c $(NAME)
-	./a.out
+# test:	
+# 	make 
+# 	$(CC) $(NAME) ../main_ft_printf.c
+# 	./a.out
 
 
 clean:
@@ -49,4 +56,4 @@ fclean:	clean
 
 re: fclean all
 
-.PHONY:	all clean fclean re ${SUBDIR} test
+.PHONY:	all clean fclean re ${SUBDIR}
