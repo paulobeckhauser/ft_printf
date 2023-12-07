@@ -39,10 +39,10 @@ $(OBJS):
 ${SUBDIR}:
 	cd ${SUBDIR} && ${MAKE}
 
-# test:	
-# 	make 
-# 	$(CC) $(NAME) ../main_ft_printf.c
-# 	./a.out
+test:	
+	make 
+	$(CC) $(NAME) main_ft_printf.c
+	./a.out
 
 
 clean:
@@ -56,4 +56,4 @@ fclean:	clean
 
 re: fclean all
 
-.PHONY:	all clean fclean re ${SUBDIR}
+.PHONY:	all clean fclean re ${SUBDIR} test
